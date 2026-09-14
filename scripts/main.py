@@ -3,6 +3,7 @@ import random
 import sys
 import math
 import os
+from pathlib import Path
 
 # Inicializar o Pygame
 pygame.init()
@@ -23,35 +24,37 @@ roxo = (100, 0, 100)
 # Fonte para texto
 fonte_texto = pygame.font.Font(None, 40)
 
-# Arquivo de ranking
-arquivo_ranking = "ranking.txt"
+# Arquivos do projeto, independentemente da pasta de onde o jogo for iniciado
+diretorio_projeto = Path(__file__).resolve().parent.parent
+arquivo_ranking = diretorio_projeto / "ranking.txt"
 
 # Função para carregar imagens
 def carregar_imagem(caminho, tamanho):
     try:
         imagem = pygame.image.load(caminho)
         return pygame.transform.scale(imagem, tamanho)
-    except pygame.error:
+    except (pygame.error, OSError):
         imagem_placeholder = pygame.Surface(tamanho)
         imagem_placeholder.fill(preto)
         return imagem_placeholder
 
 # Carregar imagens
-image_cachorro = carregar_imagem("assets/cachorro.png", (50, 50))
-imagem_hamburguer = carregar_imagem("assets/hamburguer.png", (50, 50))
-image_vilao = carregar_imagem("assets/vilao.png", (50, 50))
-imagem_fundo = carregar_imagem("assets/fundo.png", (largura, altura))
+diretorio_assets = diretorio_projeto / "assets"
+image_cachorro = carregar_imagem(diretorio_assets / "cachorro.png", (50, 50))
+imagem_hamburguer = carregar_imagem(diretorio_assets / "hamburguer.png", (50, 50))
+image_vilao = carregar_imagem(diretorio_assets / "vilao.png", (50, 50))
+imagem_fundo = carregar_imagem(diretorio_assets / "fundo.png", (largura, altura))
 
 # Função para salvar a pontuação no ranking
 def salvar_ranking(nome, pontuacao):
-    with open(arquivo_ranking, "a") as arquivo:
+    with open(arquivo_ranking, "a", encoding="utf-8") as arquivo:
         arquivo.write(f"{nome} {pontuacao}\n")
 
 # Função para carregar o ranking
 def carregar_ranking():
     if not os.path.exists(arquivo_ranking):
         return []
-    with open(arquivo_ranking, "r") as arquivo:
+    with open(arquivo_ranking, "r", encoding="utf-8") as arquivo:
         ranking = []
         for linha in arquivo:
             dados = linha.strip().rsplit(None, 1)
@@ -110,7 +113,7 @@ def tela_inicial():
                     return nome_digitado
                 elif evento.key == pygame.K_BACKSPACE:
                     nome_digitado = nome_digitado[:-1]
-                else:
+                elif evento.unicode.isprintable() and len(nome_digitado) < 20:
                     nome_digitado += evento.unicode
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if botao_iniciar.collidepoint(evento.pos):
@@ -237,5 +240,7 @@ def main():
             break
 
 if __name__ == "__main__":
-    main()
-# C extensions
+    try:
+        main()
+    finally:
+        pygame.quit()
