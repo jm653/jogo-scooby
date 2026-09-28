@@ -28,3 +28,6 @@ As imagens usadas pelo jogo ficam na pasta `assets/`. As pontuações são armaz
 - Setas direcionais: movimentar o personagem
 - Enter: iniciar ou jogar novamente
 - Esc: sair na tela final
+python -m pip install -r requirements.txt
+python scripts/main.py
+python -m py_compile scripts/main.py

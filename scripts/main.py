@@ -90,19 +90,20 @@ def tela_inicial():
         tela.fill(branco)
         tela.blit(imagem_fundo, (0, 0))
 
-        titulo = fonte_texto.render("Cão Vingador: A Caçada ao Hambúrguer", True, roxo)
-        tela.blit(titulo, (largura // 4, altura // 6))
+        titulo = fonte_texto.render("Cão Vingador: A Caçada ao Hambúrguer", True, branco)
+        tela.blit(titulo, titulo.get_rect(center=(largura // 2, int(altura * 0.25))))
 
-        texto_nome = fonte_texto.render("Digite seu nome:", True, preto)
-        tela.blit(texto_nome, (largura // 4, altura // 3))
+        texto_nome = fonte_texto.render("Digite seu nome:", True, branco)
+        tela.blit(texto_nome, texto_nome.get_rect(center=(largura // 2, int(altura * 0.43))))
 
-        nome_surface = fonte_texto.render(nome_digitado, True, preto)
-        tela.blit(nome_surface, (largura // 4, altura // 2))
+        nome_surface = fonte_texto.render(nome_digitado, True, branco)
+        tela.blit(nome_surface, nome_surface.get_rect(center=(largura // 2, int(altura * 0.54))))
 
-        botao_iniciar = pygame.Rect(largura // 3, altura // 1.5, 150, 50)
+        botao_iniciar = pygame.Rect(0, 0, 150, 50)
+        botao_iniciar.center = (largura // 2, int(altura * 0.68))
         pygame.draw.rect(tela, azul, botao_iniciar)
         texto_botao = fonte_texto.render("Iniciar", True, branco)
-        tela.blit(texto_botao, (largura // 3 + 40, altura // 1.5 + 10))
+        tela.blit(texto_botao, texto_botao.get_rect(center=botao_iniciar.center))
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -226,7 +227,7 @@ def jogo(nome):
         for vilao in viloes:
             tela.blit(image_vilao, (vilao["x"], vilao["y"]))
 
-        texto = fonte_texto.render(f"Nome: {nome} Pontos: {pontuacao} Fase: {fase}", True, preto)
+        texto = fonte_texto.render(f"Nome: {nome} Pontos: {pontuacao} Fase: {fase}", True, branco)
         tela.blit(texto, (10, 10))
 
         pygame.display.flip()
