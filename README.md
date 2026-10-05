@@ -23,7 +23,7 @@ python scripts/main.py
 
 As imagens usadas pelo jogo ficam na pasta `assets/`. As pontuações são armazenadas em `ranking.txt`.
 
-## Controles
+## Controless
 
 - Setas direcionais: movimentar o personagem
 - Enter: iniciar ou jogar novamente

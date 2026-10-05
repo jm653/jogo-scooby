@@ -39,3 +39,9 @@ sense 5
 jm 17
 jm 3
 jaoo 45
+teste 22
+jooa 27
+ruzzi 20
+joaoo 21
+jaoo 42
+joao 23

@@ -9,7 +9,7 @@ venv/
 env/
 ENV/
 
-# Test and tooling caches
+# Test and tooling cacshes
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
