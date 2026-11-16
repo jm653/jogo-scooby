@@ -17,9 +17,9 @@ python -m pip install -r requirements.txt
 
 ## Execução
 
-```powershell
+powershell
 python scripts/main.py
-```
+
 
 As imagens usadas pelo jogo ficam na pasta `assets/`. As pontuações são armazenadas em `ranking.txt`.
 
